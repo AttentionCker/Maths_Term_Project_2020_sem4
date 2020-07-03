@@ -1,0 +1,191 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+    {\Huge Introduction\\}
+
+    \textbf{Jacobi Method}, also know as \textit{Jacobi's iteration method}, is an iterative numerical 
+    method that can be employed to solve linear algebraic systems of equations that are strictly \textbf{diagonally dominant}.
+    Consider the system of equations:
+    \\        
+
+%------------------------------------------------------------------------------    
+
+    \begin{align*}\label{eq1}
+        &a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \quad\quad\quad\quad\quad\quad\quad\quad(1.1)\\
+        &a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2  \quad\quad\quad\quad\quad\quad\quad\quad(1.2)\\
+        &\;\;\vdots \hspace{15mm} \vdots \hspace{10mm} \ddots \hspace{7mm} \vdots \hspace{10mm} \vdots\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\vdots \\
+        &a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n \quad\quad\quad\quad\quad\quad\quad\quad(1.n)
+    \end{align*}
+
+
+%------------------------------------------------------------------------------
+    \vspace{19mm}  
+
+    The above system can be represented as:
+
+    \begin{equation}
+        A\textbf{x} = \textbf{b}
+    \end{equation}
+%------------------------------------------------------------------------------
+    \vspace{10mm}
+    
+    where, 
+
+    \begin{equation*}
+        A = \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots& \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix},
+        \quad
+        \textbf{x} = \begin{bmatrix}
+            x_{1}  \\
+            x_{2}  \\
+            \vdots \\
+            x_{n} 
+        \end{bmatrix},
+        \quad
+        \textbf{b} = \begin{bmatrix}
+            b_{1}  \\
+            b_{2}  \\
+            \vdots \\
+            b_{n} 
+        \end{bmatrix}
+    \end{equation*}
+
+    \clearpage
+
+%------------------------------------------------------------------------------
+    Let A be further written as a sum of 3 matrices $L$, $U$, $D$ as ``$A = L + D + U$``, 
+    \\
+    where $L, D, U$ are strictly lower triangular, diagonal and upper triangular matrices, respectively:
+    \\
+
+    $\quad\quad A \quad\quad\quad\quad\quad = \quad\quad\quad\quad\; L \quad\quad\quad\quad +  \quad\quad\quad\quad D \quad\quad\quad\quad\quad + \quad\quad\quad\quad U$ 
+    \begin{equation*}
+        \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots& \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix} =
+        \;
+        \begin{bmatrix}
+            0      & 0      & \cdots & 0 \\
+            a_{21} & 0      & \cdots & 0 \\
+            \vdots & \vdots & \ddots& \vdots \\
+            a_{n1} & a_{n2} & \cdots & 0
+        \end{bmatrix}+
+        \;
+        \begin{bmatrix}
+            a_{11} & 0      & \cdots & 0 \\
+            0      & a_{22} & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0      & 0      & \cdots & a_{nn}
+        \end{bmatrix}+
+        \;
+        \begin{bmatrix}
+            0      & a_{12} & \cdots & a_{1n} \\
+            0      & 0      & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0      & 0      & \cdots & 0
+        \end{bmatrix}
+    \end{equation*}
+
+
+%------------------------------------------------------------------------------
+    \vspace{14mm}
+
+    Then, from \textit{Jacobi Method}, the $i^{th}$ approximation, $\textbf{x}^{(i)}$, is computed as:
+
+    \begin{equation}
+        \textbf{x}^{(i)} = D^{-1}(\textbf{b} - (L+U) \textbf{x}^{(i-1)})
+    \end{equation}
+
+%------------------------------------------------------------------------------
+\vspace{15mm}
+Consider the following system of equations: 
+% \\ with diagonally :
+
+    \begin{align}\label{eq1}
+        a_{11}x_1 + a_{12}x_2 + a_{13}x_3 &= b_1 \\
+        a_{21}x_1 + a_{22}x_2 + a_{23}x_3 &= b_2 \\
+        a_{31}x_1 + a_{32}x_2 + a_{33}x_3 &= b_3 
+    \end{align}
+
+%------------------------------------------------------------------------------
+\vspace{13mm}
+Let $a_{11}, a_{22}, a_{33}$ be the numerically dominant coefficients for the above system.
+Then on solving for $x_1, x_2, x_3$, they can be written as:
+
+    \begin{align}\label{eq1}
+        x_1  &= \frac{1}{a_{11}}(b_1 - a_{12}x_2 - a_{13}x_3) \\
+        x_2  &= \frac{1}{a_{22}}(b_2 - a_{21}x_1 - a_{23}x_3)  \\
+        x_3  &= \frac{1}{a_{33}}(b_3 - a_{31}x_1 - a_{32}x_2) 
+    \end{align}
+
+Let us start with some initial approximation $\textbf{x}^{(0)}$ 
+
+    \begin{align*}\label{eq1}
+    \textbf{x}^{(0)} = \begin{bmatrix}
+        x_1^{(0)}\\
+        x_2^{(0)}\\
+        x_3^{(0)}
+    \end{bmatrix}     
+    \end{align*}
+
+    Then the first approximation, $\textbf{x}^{(1)}$, can be calculated by substituting $x_1^{(0)}, x_2^{(0)}, x_3^{(0)}$ in RHS of (6), (7) and (8):
+
+    \begin{align*}
+        x_1^{(1)}  &= \frac{1}{a_{11}}(b_1 - a_{12}x_2^{(0)} - a_{13}x_3^{(0)}) \\
+        x_2^{(1)}  &= \frac{1}{a_{22}}(b_2 - a_{21}x_1^{(0)} - a_{23}x_3^{(0)})  \\
+        x_3^{(1)}  &= \frac{1}{a_{33}}(b_3 - a_{31}x_1^{(0)} - a_{32}x_2^{(0)}) 
+    \end{align*}
+
+
+    Once we obtain $\textbf{x}^{(1)}$, we can repeat the above process to compute $\textbf{x}^{(2)}$, 
+    \\$\textbf{x}^{(3)}$, \ldots, $\textbf{x}^{(i)}$, \ldots using :
+
+    \begin{align*}
+        x_1^{(i)}  &= \frac{1}{a_{11}}(b_1 - a_{12}x_2^{(i-1)} - a_{13}x_3^{(i-1)}) \\
+        x_2^{(i)}  &= \frac{1}{a_{22}}(b_2 - a_{21}x_1^{(i-1)} - a_{23}x_3^{(i-1)})  \\
+        x_3^{(i)}  &= \frac{1}{a_{33}}(b_3 - a_{31}x_1^{(i-1)} - a_{32}x_2^{(i-1)}) 
+    \end{align*}
+
+    Which takes the following Matrix form,
+    \\
+
+    \begin{equation*}
+    \textbf{x}^{(i)} = \begin{bmatrix}
+         \frac{1}{a_{11}} &     0            &      0           \\
+            0             & \frac{1}{a_{22}} &      0            \\
+            0             &     0            & \frac{1}{a_{33}}       
+    \end{bmatrix} \left(
+    \begin{bmatrix}
+        b_{1}  \\
+        b_{2}  \\
+        b_{3} 
+    \end{bmatrix} - 
+    \begin{bmatrix}
+            0      &     a_{12} &      a_{13}           \\
+            a_{21} &     0      &      a_{23}            \\
+            a_{31} &     a_{32} &       0       
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_{1}^{(i-1)}  \\
+        x_{2}^{(i-1)}  \\
+        x_{3}^{(i-1)} 
+    \end{bmatrix} \right)    
+    \end{equation*}
+
+%------------------------------------------------------------------------------
+    \vspace{2mm}
+    i.e.
+
+    \[
+        \textbf{x}^{(i)} = D^{-1}(\textbf{b} - (L+U) \textbf{x}^{(i-1)})
+    \]
+
+
+\end{document}
