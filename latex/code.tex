@@ -1,3 +1,12 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+Our Matlab implementation of Jacobi's algorithm\\
+
+{\footnotesize
+\begin{minted}[linenos=true]{matlab}    
+    
 fprintf('\nTake Ax = b as the system of linear equations in x\n');
 A = input("Enter The COEFFICIENT Matrix: A = ");
 b = input("Enter The COLUMN vector b = ");
@@ -39,3 +48,8 @@ else    % finding the solution upto the desired tolerance
         fprintf("%.10f\n", x(i));
     end    
 end
+    \end{minted}
+}
+
+\clearpage
+\end{document}
