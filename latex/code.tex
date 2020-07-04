@@ -25,7 +25,7 @@ else    % finding the solution upto the desired tolerance
     D = diag(diag(A)); L_plus_U = A - D;  
 
     %Convergence criterion check: spectral radius of iteration matrix < 1
-    if max(abs(eig(D\L_plus_U))) >= 1 && min(abs(diag(A))) > 0              
+    if max(abs(eig(D\L_plus_U))) >= 1 || min(abs(diag(A))) == 0              
         error("The matrix A doesn't meet the  convergence criterion!");
     end
 
