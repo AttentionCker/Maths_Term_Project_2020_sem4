@@ -1,0 +1,41 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+    
+    \noindent{\Huge Discussions} \\
+
+    There are a few points worth mentioning about the \textit{Jacobi Method} algorithm and the program 
+    \textit{Solve\_Lin\_Alg\_Jacobi\_method.m}:
+    \\
+    \begin{itemize}
+        
+        \item There can various criteria for \textit{convergence} for a numerical method. 
+        For most matrix based iterative algorithms the standard convergence criterion is that the spectral radius of the iteration 
+        matrix is less than 1:\\\\
+        For \textit{Jacobi Method} it is,   
+        $\rho \left( D^{-1} \left( L + U \right) \right) < 1$
+        \\\\
+        Line: {\small $9$} in the code performs this check. It will ensure convergence criterion is met! 
+
+
+        \item It is important to shed light upon the fact that \textit{diagonal dominance} is just a 
+        \textbf{sufficient} condition and not a \textbf{necessary} condition. The \textbf{necessary} criterion 
+        has been stated in the previous bullet point.
+
+        \item This algorithm is based on similar grounds as the popular \textit{FIXED POINT ITERATION METHOD} 
+        also known as \textit{Iteration Method}.
+
+        \item The program is only allowed to have a maximum of $500$ iterations (line: $25$ and $27$) therefore the program might terminate without 
+        outputting the solution to desired accuracy. This is done to ensure that the program terminates and does not fall in an infinite loop!
+    \\
+
+    \end{itemize}
+    
+    \noindent{\Huge Conclusion} \\\\
+    Jacobi method has been described in quite enough detail for a general understanding of the method. Apart from that, a working program has been shown that performs soft computations 
+    based on this algorithm. \\
+    It is also worthy of noting that Jacobi method is a good starting point for comprehending other iterative methods to solve a system of equations but it is not the finest 
+        of algorithms that can solve a large system efficiently. There are better methods like \textit{Gauss-Seidel} (nearly twice as fast as \textit{Jacobi}) and \textit{Successive-Over Relaxation} (even faster than \textit{Gauss-Seidel}!). 
+    
+
+\end{document}
